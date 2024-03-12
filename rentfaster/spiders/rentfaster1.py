@@ -3,7 +3,7 @@ import scrapy
 # import gspread
 # from oauth2client.service_account import ServiceAccountCredentials
 from scrapy.crawler import CrawlerProcess
-from items import RentfasterItem
+from rentfaster.items import RentfasterItem
 
 
 class Rentfaster1Spider(scrapy.Spider):
