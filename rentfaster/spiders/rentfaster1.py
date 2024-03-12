@@ -2,7 +2,8 @@ import re
 import scrapy
 # import gspread
 # from oauth2client.service_account import ServiceAccountCredentials
-#from scrapy.crawler import CrawlerProcess
+from scrapy.crawler import CrawlerProcess
+from items import RentfasterItem
 
 
 class Rentfaster1Spider(scrapy.Spider):
@@ -77,15 +78,15 @@ class Rentfaster1Spider(scrapy.Spider):
                 '-', '')
         except:
             number = ''
+        item = RentfasterItem()
 
-        item = {
-            'Web Link': response.url,
-            'Listing ID': id,
-            'Type': type,
-            'Price': price,
-            'Address': address,
-            'Number': number
-        }
+        item['WebLink'] = response.url
+        item['ListingID'] = id
+        item["Type"] = type
+        item["Price"] = price
+        item["Address"] = address
+        item["Number"] = number
+
         data = [response.url, id, type, price, address, number]
         self.Google_add(data)
         yield item
