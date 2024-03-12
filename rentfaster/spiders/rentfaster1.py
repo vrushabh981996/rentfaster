@@ -27,7 +27,7 @@ class Rentfaster1Spider(scrapy.Spider):
     #
     #     return web_links
 
-    def parse(self, response):
+    def parse(self, response, **kwargs):
         filtered_links = []
         all_location_links = re.findall('<loc>(.*?)</loc>', response.text)
 
