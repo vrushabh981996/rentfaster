@@ -1,7 +1,7 @@
 import re
 import scrapy
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
+# import gspread
+# from oauth2client.service_account import ServiceAccountCredentials
 from scrapy.crawler import CrawlerProcess
 
 
@@ -11,19 +11,20 @@ class Rentfaster1Spider(scrapy.Spider):
 
     def __init__(self):
         super().__init__()
-        self.google_sheet_links = self.Google_sheet_read()
+        # self.google_sheet_links = self.Google_sheet_read()
+        self.google_sheet_links = []
 
-    def Google_sheet_read(self):
-        scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-        creds = ServiceAccountCredentials.from_json_keyfile_name('bold-site-413506-601790b6c62f.json', scope)
-        client = gspread.authorize(creds)
-        sheet_name = 'Rentfaster'
-        sheet = client.open(sheet_name).sheet1
-
-        column_data = sheet.col_values(1)
-        web_links = column_data[1:]
-
-        return web_links
+    # def Google_sheet_read(self):
+    #     scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+    #     creds = ServiceAccountCredentials.from_json_keyfile_name('bold-site-413506-601790b6c62f.json', scope)
+    #     client = gspread.authorize(creds)
+    #     sheet_name = 'Rentfaster'
+    #     sheet = client.open(sheet_name).sheet1
+    #
+    #     column_data = sheet.col_values(1)
+    #     web_links = column_data[1:]
+    #
+    #     return web_links
 
     def parse(self, response):
         filtered_links = []
@@ -91,21 +92,21 @@ class Rentfaster1Spider(scrapy.Spider):
 
         
 
-    def Google_add(self, data):
-        scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-        creds = ServiceAccountCredentials.from_json_keyfile_name('bold-site-413506-601790b6c62f.json', scope)
-        client = gspread.authorize(creds)
-        sheet_name = 'Rentfaster'
-        sheet = client.open(sheet_name).sheet1
+    # def Google_add(self, data):
+    #     scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+    #     creds = ServiceAccountCredentials.from_json_keyfile_name('bold-site-413506-601790b6c62f.json', scope)
+    #     client = gspread.authorize(creds)
+    #     sheet_name = 'Rentfaster'
+    #     sheet = client.open(sheet_name).sheet1
+    #
+    #     sheet.append_row(data)
+    #     self.logger.info("Data added to Google Sheet successfully!")
+    #     self.logger.info("Data saved: %s", data)
 
-        sheet.append_row(data)
-        self.logger.info("Data added to Google Sheet successfully!")
-        self.logger.info("Data saved: %s", data)
-
-
-process = CrawlerProcess({
-    'USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
-})
-process.crawl(Rentfaster1Spider)
-process.start()
+#
+# process = CrawlerProcess({
+#     'USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
+# })
+# process.crawl(Rentfaster1Spider)
+# process.start()
 
